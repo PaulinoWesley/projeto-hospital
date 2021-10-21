@@ -2,16 +2,16 @@ package com.br.hospital.wesley.entity;
 
 import java.time.LocalDateTime;
 
-public class consulta {
+public class Consulta {
 	private Integer idConsulta;
 	private String medico;
 	private String paciente;
 	private String descricaoReceita;
 	private LocalDateTime horarioConsulta;
 
-	public consulta() { }
+	public Consulta() { }
 	
-	public consulta(Integer idConsulta, String medico, String paciente,
+	public Consulta(Integer idConsulta, String medico, String paciente,
 			String descricaoReceita, LocalDateTime horarioConsulta) {
 		this.idConsulta = idConsulta;
 		this.medico = medico;

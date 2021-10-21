@@ -1,4 +1,4 @@
-package com.br.hospital.wesley.repository;
+package com.br.hospital.wesley.repository.purejdbc;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-public class pacienteRepository {
+public class PacienteRepositoryold {
 	
 	public static void insertPaciente(String cpf, String nome, LocalDate dataNascimento) throws SQLException {
 		Connection conn = MyConnection.getInstance();
@@ -46,7 +46,7 @@ public class pacienteRepository {
 		ResultSet rs = stmt.executeQuery(SQL);
 	}
 	
-	public static void readForCPF(String cpf) throws SQLException {
+	public static void readByCPF(String cpf) throws SQLException {
 		Connection conn = MyConnection.getInstance();
 		String SQL = "SELECT NOME, DATANASCIMENTO FROM HOSPITL.PACIENTE WHERE cpf = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(SQL);

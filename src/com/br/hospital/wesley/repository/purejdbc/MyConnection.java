@@ -1,4 +1,4 @@
-package com.br.hospital.wesley.repository;
+package com.br.hospital.wesley.repository.purejdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,13 +1,13 @@
 package com.br.hospital.wesley.entity;
 
-public class medico {
+public class Medico {
 	private String crm;
 	private String nome;
 
-	public medico() {
+	public Medico() {
 	}
 
-	public medico(String crm, String nome) {
+	public Medico(String crm, String nome) {
 		this.crm = crm;
 		this.nome = nome;
 	}
