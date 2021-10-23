@@ -70,11 +70,9 @@ public class ConsultaRepository implements IConsultaRepository {
 			c.setHorarioConsulta(rs.getTimestamp("horarioConsulta").toLocalDateTime());
 			
 			resultado.add(c);
-		};
-		
+		}
 		return resultado;
 	}
-
 	
 	public List<Consulta> findByMed(String medico) throws SQLException {
 		Connection conn = MyConnection.getInstance();
@@ -85,7 +83,6 @@ public class ConsultaRepository implements IConsultaRepository {
 		ResultSet rs = preparedStatement.executeQuery(SQL);
 		
 		List<Consulta> resultado = new ArrayList<Consulta>();
-		
 		while (rs.next()) {
 			Consulta consulta = new Consulta();
 			consulta.setIdConsulta(rs.getInt("idCOnsulta"));
@@ -109,7 +106,6 @@ public class ConsultaRepository implements IConsultaRepository {
 		ResultSet rs = preparedStatement.executeQuery(SQL);
 		
 		List<Consulta> resultado = new ArrayList<Consulta>();
-		
 		while (rs.next()) {
 			Consulta consulta = new Consulta();
 			consulta.setMedico(rs.getString("medico"));
@@ -128,11 +124,9 @@ public class ConsultaRepository implements IConsultaRepository {
 		PreparedStatement preparedStatement = conn.prepareStatement(SQL);
 		preparedStatement.setInt(1, idConsulta);
 		System.out.println(SQL);
-
 		ResultSet rs = preparedStatement.executeQuery(SQL);
 		
 		Consulta consulta = null;
-		
 		while (rs.next()) {
 			consulta = new Consulta();
 			consulta.setMedico(rs.getString("medico"));
@@ -143,5 +137,4 @@ public class ConsultaRepository implements IConsultaRepository {
 		}
 		return consulta;
 	}
-
 }
