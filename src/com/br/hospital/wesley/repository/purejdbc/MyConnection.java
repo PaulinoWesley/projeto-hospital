@@ -8,7 +8,8 @@ public abstract class MyConnection {
 	private static Connection conn;
 		
 	public static Connection getInstance() throws SQLException {
-		String connectionUrl = "jdbc:mssql://localhost:1433;databaseName=master;user=sa;password=N01teQu3nt3";
+		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
+		String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=master;user=sa;password=N01teQu3nt3";
 		if (conn == null) {
 			conn = DriverManager.getConnection(connectionUrl);
 		}

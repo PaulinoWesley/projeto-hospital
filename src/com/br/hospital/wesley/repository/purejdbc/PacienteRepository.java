@@ -16,12 +16,17 @@ public class PacienteRepository implements IPacienteRepository {
 
 	public void insert(Paciente paciente) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String insert = "INSERT INTO HOSPITAL.PACIENTE(cpf, nome, dataNascimento)VALUES(?,?,?)";
+		String insert = "INSERT INTO HOSPITAL.PACIENTE(cpf, nome, dataNascimento) VALUES (?,?,?)";
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 
 		preparedStatement.setString(1, paciente.getCpf());
 		preparedStatement.setString(2, paciente.getNome());
 		preparedStatement.setDate(3, Date.valueOf(paciente.getDataNascimento()));
+		
+		preparedStatement.execute();
+		
+		conn.commit();
+		conn.close();
 	}
 
 	public void update(Paciente paciente) throws SQLException {
@@ -32,6 +37,8 @@ public class PacienteRepository implements IPacienteRepository {
 		preparedStatement.setString(1, paciente.getNome());
 		preparedStatement.setDate(2, Date.valueOf(paciente.getDataNascimento()));
 		preparedStatement.setString(3, paciente.getCpf());
+		
+		preparedStatement.executeUpdate();
 	}
 
 	public void delete(Paciente paciente) throws SQLException {
@@ -40,6 +47,7 @@ public class PacienteRepository implements IPacienteRepository {
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 		
 		preparedStatement.setString(1, paciente.getCpf());
+		preparedStatement.execute();
 	}
 
 	public List<Paciente> findAll() throws SQLException {

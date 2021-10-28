@@ -24,6 +24,7 @@ public class ConsultaRepository implements IConsultaRepository {
 		preparedStatement.setString(2, consulta.getDescricaoReceita());
 		preparedStatement.setTimestamp(3, Timestamp.valueOf(consulta.getHorarioConsulta()));
 		preparedStatement.setString(4, consulta.getMedico());
+		preparedStatement.execute();
 		conn.commit();
 	}
 
@@ -38,6 +39,8 @@ public class ConsultaRepository implements IConsultaRepository {
 		preparedStatement.setString(3, consulta.getDescricaoReceita());
 		preparedStatement.setTimestamp(4, Timestamp.valueOf(consulta.getHorarioConsulta()));
 		preparedStatement.setInt(5,  consulta.getIdConsulta());
+		
+		preparedStatement.executeUpdate();
 	}
 
 	public void delete(Consulta consulta) throws SQLException {
@@ -50,6 +53,8 @@ public class ConsultaRepository implements IConsultaRepository {
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 		
 		preparedStatement.setInt(1, idConsulta);
+		
+		preparedStatement.execute();
 	}
 
 	public List<Consulta> findAll() throws SQLException {
@@ -57,7 +62,6 @@ public class ConsultaRepository implements IConsultaRepository {
 		Statement stmt = conn.createStatement();
 		String SQL = "SELECT idConsulta, medico, paciente, descricaoReceita, horarioConsulta "
 				+ " FROM master.hospital.consulta;";
-		System.out.println(SQL);
 		ResultSet rs = stmt.executeQuery(SQL);
 		
 		List<Consulta> resultado = new ArrayList<Consulta>();

@@ -20,6 +20,11 @@ public class MedicoRepository implements IMedicoRepository {
 		
 		preparedStatement.setString(1, medico.getCrm());
 		preparedStatement.setString(2, medico.getNome());
+		
+		preparedStatement.execute();
+		
+		conn.commit();
+		conn.close();
 	}
 
 	public void update(Medico medico) throws SQLException {
@@ -29,6 +34,8 @@ public class MedicoRepository implements IMedicoRepository {
 		
 		preparedStatement.setString(1, medico.getNome());
 		preparedStatement.setString(2, medico.getCrm());
+		
+		preparedStatement.executeUpdate();
 	}
 
 	public void delete(Medico medico) throws SQLException {
@@ -37,6 +44,8 @@ public class MedicoRepository implements IMedicoRepository {
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 		
 		preparedStatement.setString(1, medico.getCrm());
+		
+		preparedStatement.execute();
 	}
 
 	public List<Medico> findAll() throws SQLException {
