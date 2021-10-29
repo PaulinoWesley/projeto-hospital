@@ -29,7 +29,7 @@ public class MedicoRepository implements IMedicoRepository {
 
 	public void update(Medico medico) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String insert = "UPDATE HOSPITAL.MEDICO SET nome = ? WHERE cpf = ?";
+		String insert = "UPDATE HOSPITAL.MEDICO SET nome = ? WHERE crm = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 		
 		preparedStatement.setString(1, medico.getNome());
@@ -68,8 +68,10 @@ public class MedicoRepository implements IMedicoRepository {
 	public Medico findByCrm(String crm) throws SQLException {
 		Connection conn = MyConnection.getInstance();
 		Statement stmt = conn.createStatement();
-		String SQL = "SELECT MEDICO FROM HOSPITAL.MEDICO WHERE crm = ?";
-		ResultSet rs = stmt.executeQuery(SQL);
+		String SQL = "SELECT CRM, NOME FROM HOSPITAL.MEDICO WHERE CRM = ?";
+		PreparedStatement preparedStatement = conn.prepareStatement(SQL);
+		preparedStatement.setString(1, crm);
+		ResultSet rs = preparedStatement.executeQuery();
 		
 		Medico medico = null;
 		while(rs.next()) {

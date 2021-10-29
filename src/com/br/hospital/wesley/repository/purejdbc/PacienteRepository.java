@@ -54,7 +54,6 @@ public class PacienteRepository implements IPacienteRepository {
 		Connection conn = MyConnection.getInstance();
 		Statement stmt = conn.createStatement();
 		String SQL = "SELECT * FROM HOSPITAL.PACIENTE";
-		System.out.println(SQL);
 		ResultSet rs = stmt.executeQuery(SQL);
 		
 		List<Paciente> resultado = new ArrayList<Paciente>();
@@ -69,24 +68,22 @@ public class PacienteRepository implements IPacienteRepository {
 		return resultado;
 	}
 
-	public List<Paciente> findByCpf(String cpf) throws SQLException {
+	public Paciente findByCpf(String cpf) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String SQL = "SELECT NOME, DATANASCIMENTO FROM HOSPITL.PACIENTE WHERE cpf = ?";
+		String SQL = "SELECT NOME, DATANASCIMENTO, CPF FROM HOSPITAL.PACIENTE WHERE CPF = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(SQL);
 		preparedStatement.setString(1, cpf);
-		System.out.println(SQL);
-		ResultSet rs = preparedStatement.executeQuery(SQL);
+		ResultSet rs = preparedStatement.executeQuery();
 		
-		List<Paciente> resultado = new ArrayList<Paciente>();
 		while(rs.next()) {
 			Paciente pc = new Paciente();
 			pc.setCpf(rs.getString("cpf"));
 			pc.setNome(rs.getString("nome"));
 			pc.setDataNascimento(rs.getDate("dataNascimento").toLocalDate());
 			
-			resultado.add(pc);
+			return pc;
 		}
-		return resultado;
+		return null;
 	}
 
 }

@@ -21,11 +21,14 @@ public class ConsultaService {
 		String medico = sc.nextLine();
 		System.out.println("Digite a data e horario do agendamento da consulta [dd/mm/aaaa hh:mm:ss]: ");
 		LocalDateTime horarioConsulta = Utils.stringToDateTime(sc.nextLine());
-
+		System.out.println("Digite a receita: ");
+		String receita = sc.nextLine();
+		
 		Consulta consulta = new Consulta();
 		consulta.setPaciente(paciente);
 		consulta.setMedico(medico);
 		consulta.setHorarioConsulta(horarioConsulta);
+		consulta.setDescricaoReceita(receita);
 
 		consultaRepository.insert(consulta);
 

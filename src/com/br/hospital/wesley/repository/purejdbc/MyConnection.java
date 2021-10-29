@@ -10,7 +10,7 @@ public abstract class MyConnection {
 	public static Connection getInstance() throws SQLException {
 		DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
 		String connectionUrl = "jdbc:sqlserver://localhost:1433;databaseName=master;user=sa;password=N01teQu3nt3";
-		if (conn == null) {
+		if (conn == null || conn.isClosed()) {
 			conn = DriverManager.getConnection(connectionUrl);
 		}
 		return conn;

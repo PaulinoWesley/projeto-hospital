@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import com.br.hospital.wesley.service.PacienteService;
+import com.br.hospital.wesley.tests.MedicoRepositoryTeste;
+import com.br.hospital.wesley.tests.PacienteRepositoryTest;
+import com.br.hospital.wesley.repository.purejdbc.PacienteRepository;
 import com.br.hospital.wesley.service.ConsultaService;
 import com.br.hospital.wesley.service.MedicoService;
 
@@ -25,7 +28,8 @@ public class HospitalDoWesleyStartup {
 	static MedicoService medicoService = new MedicoService();
 
 	public static void main(String[] args) throws SQLException {
-		run();
+		PacienteRepositoryTest.run();
+		MedicoRepositoryTeste.run();
 	}
 
 	private static void run() throws SQLException {
