@@ -18,7 +18,7 @@ public class PacienteRepositoryTest {
 		assert (paciente.getDataNascimento().equals(savedPaciente.getDataNascimento())): "Datas de nascimento diferentes";
 		assert (paciente.getNome().equals(savedPaciente.getNome())) : "Nomes diferentes";
 
-		System.out.println("Rodou insert");
+		System.out.println("Rodou Insert de paciente");
 	}
 
 	private void testeUpdate() throws SQLException {
@@ -28,14 +28,14 @@ public class PacienteRepositoryTest {
 		Paciente savedPaciente = pacienteRepository.findByCpf(paciente.getCpf());
 		assert(savedPaciente.getNome().equals("Paciente Atualizado")): "Atualização não funcionou";
 	
-		System.out.println("Rodou Update");
+		System.out.println("Rodou Update de paciente");
 	}
 
 	private void testeList() throws SQLException {
 		boolean isPacienteNaLista = pacienteRepository.findAll().stream().anyMatch(p -> p.getCpf().equals(paciente.getCpf()));
 		
 		assert (isPacienteNaLista): "Paciente não encontrado na listagem";
-		System.out.println("Rodou list");
+		System.out.println("Rodou List de paciente");
 	}
 
 	private void testeDelete() throws SQLException {
@@ -44,7 +44,7 @@ public class PacienteRepositoryTest {
 		
 		assert (savedPaciente == null): "Paciente ainda está no banco de dados :-(";
 		
-		System.out.println("Rodou delete");
+		System.out.println("Rodou Delete de paciente");
 	}
 
 	public static void run() throws SQLException {

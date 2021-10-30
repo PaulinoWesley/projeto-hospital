@@ -27,14 +27,14 @@ public class MedicoRepositoryTeste {
 		Medico savedMedico = medicoRepository.findByCrm(medico.getCrm());
 		assert(savedMedico.getNome().equals("Médico Atualizado")): "Atualização não funcionou";
 		
-		System.out.println("Rodou Update de Médico");
+		System.out.println("Rodou Update de médico");
 	}
 	
 	private void testeList() throws SQLException {
 		boolean isMedicoNaLista = medicoRepository.findAll().stream().anyMatch(m -> m.getCrm().equals(medico.getCrm()));
 		
 		assert (isMedicoNaLista): "Medico não encontrado na listagem";
-		System.out.println("Rodou list de médico");
+		System.out.println("Rodou List de médico");
 	}
 	
 	private void testeDelete() throws SQLException {
@@ -43,7 +43,7 @@ public class MedicoRepositoryTeste {
 		
 		assert (savedMedico == null): "Medico ainda está no banco de dados :-(";
 		
-		System.out.println("Rodou delete de medico");
+		System.out.println("Rodou Delete de médico");
 	}
 	
 	public static void run() throws SQLException {

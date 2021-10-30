@@ -14,23 +14,28 @@ import com.br.hospital.wesley.repository.IConsultaRepository;
 
 public class ConsultaRepository implements IConsultaRepository {
 
-	public void insert(Consulta consulta) throws SQLException {
+	public Consulta insert(Consulta consulta) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String insert = "INSERT INTO HOSPITAL.CONSULTA(paciente, descricaoReceita, horarioConsulta, medico)"
-				+ "VALUES(?, ?, ?, ?)";
+		String insert = "INSERT INTO HOSPITAL.CONSULTA(paciente, descricaoReceita, horarioConsulta, medico) "
+				+ " VALUES (?, ?, ?, ?) SELECT CAST(SCOPE_IDENTITY() AS INT); ";
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 
 		preparedStatement.setString(1, consulta.getPaciente());
 		preparedStatement.setString(2, consulta.getDescricaoReceita());
 		preparedStatement.setTimestamp(3, Timestamp.valueOf(consulta.getHorarioConsulta()));
 		preparedStatement.setString(4, consulta.getMedico());
-		preparedStatement.execute();
-		conn.commit();
+
+		ResultSet rs = preparedStatement.executeQuery();
+		rs.next();
+
+		consulta.setIdConsulta(rs.getInt(1));
+
+		return consulta;
 	}
 
 	public void update(Consulta consulta) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String insert = "UPDATE HOSPITAL.CONSULTA SET"
+		String insert = "UPDATE HOSPITAL.CONSULTA SET "
 				+ "medico = ?, paciente = ?, descricaoReceita = ?, horarioConsulta = ? WHERE IDCONSULTA = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(insert);
 
@@ -102,7 +107,7 @@ public class ConsultaRepository implements IConsultaRepository {
 
 	public List<Consulta> findByPaciente(String paciente) throws SQLException{
 		Connection conn = MyConnection.getInstance();
-		String SQL = "SELECT MEDICO, DESCRICAORECEITA, HORARIOCONSULTA, IDCONSULTA FROM HOSPITAL.CONSULTA WHERE paciente = ?";
+		String SQL = "SELECT MEDICO, DESCRICAORECEITA, HORARIOCONSULTA, IDCONSULTA FROM HOSPITAL.CONSULTA WHERE PACIENTE = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(SQL);
 		preparedStatement.setString(1, paciente);
 		System.out.println(SQL);
@@ -124,11 +129,10 @@ public class ConsultaRepository implements IConsultaRepository {
 
 	public Consulta findById(Integer idConsulta) throws SQLException {
 		Connection conn = MyConnection.getInstance();
-		String SQL = "SELECT MEDICO, PACIENTE, DESCRICAORECEITA, HORARIOCONSULTA FROM HOSPITAL.CONSULTA WHERE IdConsulta = ?";
+		String SQL = "SELECT IDCONSULTA, MEDICO, PACIENTE, DESCRICAORECEITA, HORARIOCONSULTA FROM HOSPITAL.CONSULTA WHERE IDCONSULTA = ?";
 		PreparedStatement preparedStatement = conn.prepareStatement(SQL);
 		preparedStatement.setInt(1, idConsulta);
-		System.out.println(SQL);
-		ResultSet rs = preparedStatement.executeQuery(SQL);
+		ResultSet rs = preparedStatement.executeQuery();
 		
 		Consulta consulta = null;
 		while (rs.next()) {

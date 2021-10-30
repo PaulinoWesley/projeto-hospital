@@ -11,9 +11,8 @@ public class Consulta {
 
 	public Consulta() { }
 	
-	public Consulta(Integer idConsulta, String medico, String paciente,
+	public Consulta(String medico, String paciente,
 			String descricaoReceita, LocalDateTime horarioConsulta) {
-		this.idConsulta = idConsulta;
 		this.medico = medico;
 		this.paciente = paciente;
 		this.descricaoReceita = descricaoReceita;

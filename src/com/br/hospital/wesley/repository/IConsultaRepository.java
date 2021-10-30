@@ -6,7 +6,7 @@ import java.util.List;
 import com.br.hospital.wesley.entity.Consulta;
 
 public interface IConsultaRepository {
-	void insert(Consulta consulta) throws SQLException;
+	Consulta insert(Consulta consulta) throws SQLException;
 	void update(Consulta consulta) throws SQLException;
 	void delete(Consulta consulta) throws SQLException;
 	void delete(Integer idConsulta) throws SQLException;
